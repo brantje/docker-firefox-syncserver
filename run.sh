@@ -22,6 +22,7 @@ use = egg:syncserver
 public_url = ${URL}
 secret = ${SECRET}
 force_wsgi_environ = ${FORCE_WSGI}
+
 [loggers]
 keys = root, gunicorn
 
