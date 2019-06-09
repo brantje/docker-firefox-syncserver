@@ -30,11 +30,14 @@ As secure as I can make it.
 ### Setup
 Example command to build this image:
 ```
+git clone https://github.com/brantje/docker-firefox-syncserver
+cd docker-firefox-syncserver
 docker build -t sync .
 ```
 Example command to run this container:
 ```
 docker run -d -p 5000:5000 -e URL=https://sync.example.com --name sync sync
 ```
+
 You can now open a new tab in firefox, go to about:config, search for the identity.sync.tokenserver.uri preference and change the value to https://sync.example.com:5000/token/1.0/sync/1.5  
 Firefox should now sync with your server.
