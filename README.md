@@ -39,5 +39,35 @@ Example command to run this container:
 docker run -d -p 5000:5000 -e URL=https://sync.example.com --name sync sync
 ```
 
+
 You can now open a new tab in firefox, go to about:config, search for the identity.sync.tokenserver.uri preference and change the value to https://sync.example.com:5000/token/1.0/sync/1.5  
 Firefox should now sync with your server.
+If you're already logged in, log out and back in to make the change effective.
+
+
+
+### NGINX proxy example
+
+```
+server {
+
+        server_name example.com;
+        location / {
+             proxy_pass  http://localhost:5000/;
+             proxy_next_upstream error timeout invalid_header http_500 http_502 http_503 http_504;
+             proxy_redirect off;
+             proxy_buffering off;
+             proxy_set_header        Host            $host;
+             proxy_set_header        X-Real-IP       $remote_addr;
+             proxy_set_header        X-Forwarded-For $proxy_add_x_forwarded_for;
+             proxy_set_header        X-Forwarded-Proto $scheme;
+         }
+
+    listen 443 ssl; # managed by Certbot
+    ssl_certificate /etc/letsencrypt/live/example.com/fullchain.pem; # managed by Certbot
+    ssl_certificate_key /etc/letsencrypt/live/example.com/privkey.pem; # managed by Certbot
+    include /etc/letsencrypt/options-ssl-nginx.conf; # managed by Certbot
+    ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem; # managed by Certbot
+
+}
+```
