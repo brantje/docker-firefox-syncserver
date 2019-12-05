@@ -25,7 +25,7 @@ WORKDIR /sync
 COPY run.sh /usr/local/bin/run.sh
 
 RUN set -xe 
-RUN apk add --no-cache python2 make libstdc++ openssl py2-pip py2-virtualenv libffi-dev g++ gcc python2-dev openssl openssl-dev 
+RUN apk add --no-cache python2 make libstdc++ openssl py2-pip libffi-dev g++ gcc python2-dev openssl openssl-dev 
 RUN apk add --no-cache --virtual .build-deps
 RUN wget -qO- https://github.com/mozilla-services/syncserver/archive/${SYNC_VERSION}.tar.gz | tar xz --strip 1 
 RUN make build 
