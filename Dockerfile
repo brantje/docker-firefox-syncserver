@@ -1,4 +1,5 @@
 FROM alpine:3.9
+RUN [ "cross-build-start" ]
 RUN apk add --no-cache -U su-exec tini
 ENTRYPOINT ["/sbin/tini", "--"]
 
@@ -32,3 +33,5 @@ RUN set -xe \
 	&& chmod +x /usr/local/bin/run.sh
 
 CMD ["run.sh"]
+
+RUN [ "cross-build-end" ]
