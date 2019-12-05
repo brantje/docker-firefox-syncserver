@@ -26,8 +26,7 @@ COPY run.sh /usr/local/bin/run.sh
 
 RUN set -xe 
 RUN apk add --no-cache python2 make libstdc++ openssl 
-RUN apk add --no-cache --virtual .build-deps py2-pip g++ gcc python2-dev openssl libffi-dev openssl-dev 
-RUN apk add --no-cache --virtual py2-virtualenv
+RUN apk add --no-cache --virtual .build-deps py2-pip g++ gcc python2-dev openssl libffi-dev openssl-dev py2-virtualenv
 RUN wget -qO- https://github.com/mozilla-services/syncserver/archive/${SYNC_VERSION}.tar.gz | tar xz --strip 1 
 RUN make build 
 RUN apk del .build-deps 
