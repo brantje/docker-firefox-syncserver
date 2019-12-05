@@ -1,4 +1,5 @@
-FROM alpine:3.9
+FROM schmich/armv7hf-alpine-qemu:3.5
+RUN [ "cross-build-start" ]
 RUN apk add --no-cache -U su-exec tini
 ENTRYPOINT ["/sbin/tini", "--"]
 
@@ -30,5 +31,5 @@ RUN wget -qO- https://github.com/mozilla-services/syncserver/archive/${SYNC_VERS
 RUN make build 
 RUN apk del .build-deps 
 RUN chmod +x /usr/local/bin/run.sh
-
+RUN [ "cross-build-end" ]
 CMD ["run.sh"]
