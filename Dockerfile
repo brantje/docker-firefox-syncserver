@@ -1,4 +1,4 @@
-FROM resin/armv7hf-alpine-qemu
+FROM schmich/armv7hf-alpine-qemu:3.5
 RUN [ "cross-build-start" ]
 RUN apk add --no-cache -U su-exec tini
 ENTRYPOINT ["/sbin/tini", "--"]
