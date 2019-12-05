@@ -1,5 +1,4 @@
-FROM schmich/armv7hf-alpine-qemu:3.5
-RUN [ "cross-build-start" ]
+FROM alpine:3.9
 RUN apk add --no-cache -U su-exec tini
 ENTRYPOINT ["/sbin/tini", "--"]
 
@@ -33,5 +32,3 @@ RUN set -xe \
 	&& chmod +x /usr/local/bin/run.sh
 
 CMD ["run.sh"]
-
-RUN [ "cross-build-end" ]
